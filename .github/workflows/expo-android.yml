@@ -17,6 +17,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
+        working-directory: agroapp-complete-pwa
         run: npm install
 
       - name: Install Expo & EAS
@@ -28,4 +29,6 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
+        working-directory: agroapp-complete-pwa
         run: eas build -p android --profile preview --non-interactive
+
