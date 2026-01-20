@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "AgroApp",
+    "slug": "agroapp-complete-pwa",
+    "extra": {
+      "eas": {
+        "projectId": "25b93269-535e-403d-a1f7-ebe8a1f21855"
+      }
+    }
+  }
+}
