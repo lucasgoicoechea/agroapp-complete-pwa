@@ -11,14 +11,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Show repo structure (debug)
+        run: ls -la
+
+      - name: Show nested folders (debug)
+        run: |
+          find . -maxdepth 3 -type f -name package.json
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
-        working-directory: agroapp-complete-pwa
-        run: npm install
+        run: |
+          APP_DIR=$(dirname "$(find . -name package.json | head -n 1)")
+          echo "Using app dir: $APP_DIR"
+          cd "$APP_DIR"
+          npm install
 
       - name: Install Expo & EAS
         run: npm install -g expo-cli eas-cli
@@ -29,6 +39,7 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
-        working-directory: agroapp-complete-pwa
-        run: eas build -p android --profile preview --non-interactive
-
+        run: |
+          APP_DIR=$(dirname "$(find . -name package.json | head -n 1)")
+          cd "$APP_DIR"
+          eas build -p android --profile preview --non-interactive
