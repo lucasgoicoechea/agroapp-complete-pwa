@@ -2,6 +2,10 @@
   "expo": {
     "name": "AgroApp",
     "slug": "agroapp-complete-pwa",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.matigoicoechea.agroapp"
+    },
     "extra": {
       "eas": {
         "projectId": "25b93269-535e-403d-a1f7-ebe8a1f21855"
@@ -9,3 +13,4 @@
     }
   }
 }
+
