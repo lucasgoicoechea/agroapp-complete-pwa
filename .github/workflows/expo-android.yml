@@ -8,15 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Debug structure
-        run: |
-          pwd
-          ls -la
-          echo "package.json location:"
-          find . -maxdepth 2 -name package.json
+      - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -27,12 +19,9 @@ jobs:
         run: npm install
 
       - name: Install Expo & EAS
-        run: npm install -g expo-cli eas-cli
-
-      - name: Login to Expo
-        run: expo login --token $EXPO_TOKEN
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npm install -g eas-cli
 
       - name: Build Android APK
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build -p android --profile preview --non-interactive
